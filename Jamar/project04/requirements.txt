@@ -3,3 +3,9 @@ uvicorn
 python-multipart
 langchain
 pydantic
+reportlab
+PyPDF2
+OpenAi
+python-dotenvpi
+langchain-openai
+chromadb
