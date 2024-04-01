@@ -1,7 +1,8 @@
 from app.mymodules.manage_files import export_string_to_txt, delete_folder, json_touch
+from app.mymodules.gen_result_openai import chat_prompt_openai
 import os
 from langchain_openai import ChatOpenAI
-# from langchain_openai import OpenAI
+from langchain_openai import OpenAI
 from langchain_openai import OpenAIEmbeddings
 from langchain.embeddings.base import Embeddings
 from langchain_community.vectorstores import Chroma
@@ -18,19 +19,16 @@ import os
 from dotenv import load_dotenv, find_dotenv
 import time
 from langchain_core.prompts import ChatPromptTemplate
-from openai import OpenAI
-
-
 
 
 load_dotenv(find_dotenv(), override=True)
 os.environ.get('OPENAI_API_KEY')
-client = OpenAI()
+
 
 model_setted = ChatOpenAI()
 embeddings = OpenAIEmbeddings()
 
-# llm = OpenAI()
+llm = OpenAI()
 
 
 class RedundantFilterRetriever(BaseRetriever):
@@ -82,31 +80,32 @@ def save_embs(docs, prompt):
 def chat_prompt(doc):
 
     try:
-        # context = """
-        #     Eres un abogado experto en leyes colombianas.
-        #     Cada pretencion legal debe tener al menos 80 caracteres. Ejemplo: "PRIMERA: Debido a lo narrado en el acápite de hechos solicito de manera respetuosa me sea enviada copia original del contrato que suscribí con su entidad."
-        #     Las pretenciones pueden iniciar con palabras como: "PRIMERA", "SEGUNDA", "TERCERA", etcetera.
-        #     Si hay pretenciones, las vas a entregar en una lista de python.Ejemplo: ['pretencion_primera', 'pretencion_segunda', 'pretencion_tercera', etcetera].
-        #     Si no hay pretenciones, responde NO HAY pretenciones.
-        #     En el siguiente documento vas a buscar PRETENCIONES o PETICIONES.
-        #     """
+        context = """
+            Eres un abogado experto en leyes colombianas.
+            Cada pretencion legal debe tener al menos 80 caracteres. Ejemplo: "PRIMERA: Debido a lo narrado en el acápite de hechos solicito de manera respetuosa me sea enviada copia original del contrato que suscribí con su entidad."
+            Las pretenciones pueden iniciar con palabras como: "PRIMERA", "SEGUNDA", "TERCERA", etcetera.
+            """
         
-        context = "En una lista de python, clasifica las pretenciones detalladamente del parrafo que te enviare. SI no hay, coloca NO HAY."
+        prompt_p1 = """Te voy a dar un parrafo. Lo analizas.
+            Si no hay pretenciones, responde NO_HAY_PRETENCIONES.
+            Si hay pretenciones, las vas a entregar en una lista de python.Ejemplo: ['pretencion_primera', 'pretencion_segunda', 'pretencion_tercera', etcetera].
+            El parrafo es: """
+        
 
         template = ChatPromptTemplate.from_messages([
             ("system", context),
-            ("human", "{user_input}")
+            ("human", prompt_p1+'"{user_input}"')
         ])
 
         code_chain = LLMChain(
-            llm=client, #llm,
+            llm=llm,
             prompt=template,
             output_key='json_partial'
         )
 
         result_chain = code_chain({'user_input': str(doc)})
 
-        if 'NO HAY PRETENCIONES' in result_chain['json_partial']:
+        if 'NO_HAY_PRETENCIONES' in result_chain['json_partial']:
            print('XXX')
            return 'pass'
         
@@ -118,18 +117,7 @@ def chat_prompt(doc):
         raise Exception("An error occurred") from e
 
 
-def chat_prompt_openai(doc):
-    completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "Eres un experto en leyes colombianas. Vas a buscar unicamente pretenciones."},
-            {"role": "user", "content": f"Enumerame estas pretenciones en formato json, si no hay, responde NO HAY PRETENCIONES. Parrafo: {doc}"}
-        ]
-    )
 
-    print(completion.choices[0].message.content)
-    print(type(completion.choices[0].message.content))
-    return (str(completion.choices[0].message.content))
 
 
 def test_embb(docs):
@@ -140,14 +128,14 @@ def test_embb(docs):
             f"C:/Mega/Courses/Langchain_course/Jamar/project04/Outs/txt/input_{index}.txt"
         )
 
+        # json = chat_prompt(str(doc.page_content))
         json = chat_prompt_openai(str(doc.page_content))
         if json == 'pass':
            continue
 
         export_string_to_txt(
             json,
-            f"C:/Mega/Courses/Langchain_course/Jamar/project04/Outs/json/output_{index}.txt"
+            f"C:/Mega/Courses/Langchain_course/Jamar/project04/Outs/json/output_{index}.json"
         )
-        time.sleep(3.2)
-        break
+
     return 'OK'

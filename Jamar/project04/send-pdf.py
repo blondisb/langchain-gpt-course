@@ -9,8 +9,8 @@ if aa == '1':
 
     # Path to the PDF file you want to upload
     # pdf_file_path = "LEGAL-BERT.pdf"
-    pdf_file_path = "C:/Mega/Courses/Langchain_course/Jamar/project04/app/media/DERECHO DE PETICION JAMAR - GIAN HERNANDEZ.pdf"
-    # pdf_file_path = "C:/Mega/Courses/Langchain_course/Jamar/project04/app/media/derecho de peticion Fredy Molina.pdf"
+    # pdf_file_path = "C:/Mega/Courses/Langchain_course/Jamar/project04/app/media/DERECHO DE PETICION JAMAR - GIAN HERNANDEZ.pdf"
+    pdf_file_path = "C:/Mega/Courses/Langchain_course/Jamar/project04/app/media/derecho de peticion Fredy Molina.pdf"
     # pdf_file_path = "requirements.txt"
 
     # Open the PDF file in binary mode and send it as part of the request

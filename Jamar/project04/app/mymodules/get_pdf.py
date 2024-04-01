@@ -4,8 +4,6 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.text_splitter import  CharacterTextSplitter
 
-
-
 def proccess_pdf(pdf_path):
 
     loader = PyPDFLoader(pdf_path)
@@ -20,7 +18,7 @@ def proccess_pdf(pdf_path):
         chunk_size=100,
         chunk_overlap=0
     )
-
+    
     docs = loader.load_and_split(text_splitter)    
 
     # # Call the function to delete contents of the folder
