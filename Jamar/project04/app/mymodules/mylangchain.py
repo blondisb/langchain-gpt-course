@@ -1,6 +1,8 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.text_splitter import  CharacterTextSplitter
+import shutil
+import os
 
 
 
@@ -12,6 +14,17 @@ def export_string_to_txt(string_to_export, filename):
     except IOError:
         print("Error: Unable to write to file", filename)
 
+def delete_contents_of_folder(folder_path):
+    # Iterate over all the files and subdirectories in the folder
+    for root, dirs, files in os.walk(folder_path, topdown=False):
+        for name in files:
+            # Delete each file
+            file_path = os.path.join(root, name)
+            os.remove(file_path)
+        for name in dirs:
+            # Delete each subdirectory
+            dir_path = os.path.join(root, name)
+            shutil.rmtree(dir_path)
 
 
 def proccess_pdf(pdf_path):
@@ -20,13 +33,13 @@ def proccess_pdf(pdf_path):
 
     text_splitter = RecursiveCharacterTextSplitter(
         separators=[
-                    # "HECHOS\n"
-                    # "FUNDAMENTOS DE HECHO Y DERECHO\n",
-                    # "PRETENSIONES\n",
-                    # "NOTIFICACIONES\n"
+                    "HECHOS",
+                    "FUNDAMENTOS DE HECHO Y DERECHO",
+                    "PRETENSIONES",
+                    "NOTIFICACIONES"
                     ],
-        chunk_size=500,
-        chunk_overlap=100 
+        chunk_size=100,
+        chunk_overlap=0
     )
 
     # export_string_to_txt(str(loader.load()), "output.txt")
@@ -34,9 +47,11 @@ def proccess_pdf(pdf_path):
     docs = loader.load_and_split(text_splitter)
     print(len(docs))
 
+    # Call the function to delete contents of the folder
+    delete_contents_of_folder("C:\Mega\Courses\Langchain_course\Jamar\project04\Outs")
     for index, doc in enumerate(docs):
         print(doc.metadata)
-        export_string_to_txt(str(doc.page_content), f"C:\Mega\Courses\Langchain_course\Jamar\project04\output{str(index)}.txt")
+        export_string_to_txt(str(doc.page_content), f"C:\Mega\Courses\Langchain_course\Jamar\project04\Outs\output{str(index)}.txt")
 
     
     # export_string_to_txt(str(docs[1].page_content), f"output{1}.txt")
