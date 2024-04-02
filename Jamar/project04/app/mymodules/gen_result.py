@@ -1,5 +1,4 @@
 from app.mymodules.manage_files import export_string_to_txt, delete_folder, json_touch
-from app.mymodules.gen_result_openai import chat_prompt_openai
 import os
 from langchain_openai import ChatOpenAI
 from langchain_openai import OpenAI
@@ -115,27 +114,3 @@ def chat_prompt(doc):
     except Exception as e:
         print(e)
         raise Exception("An error occurred") from e
-
-
-
-
-
-def test_embb(docs):
-    for index, doc in enumerate(docs):
-
-        export_string_to_txt(
-            doc.page_content,
-            f"C:/Mega/Courses/Langchain_course/Jamar/project04/Outs/txt/input_{index}.txt"
-        )
-
-        # json = chat_prompt(str(doc.page_content))
-        json = chat_prompt_openai(str(doc.page_content))
-        if json == 'pass':
-           continue
-
-        export_string_to_txt(
-            json,
-            f"C:/Mega/Courses/Langchain_course/Jamar/project04/Outs/json/output_{index}.json"
-        )
-
-    return 'OK'

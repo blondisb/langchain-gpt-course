@@ -6,7 +6,7 @@ pydantic
 reportlab
 PyPDF2
 OpenAi
-python-dotenvpi
+python-dotenv
 langchain-openai
 chromadb
 boto3
