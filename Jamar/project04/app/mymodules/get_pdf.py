@@ -4,7 +4,8 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.text_splitter import  CharacterTextSplitter
 
-def proccess_pdf(pdf_path):
+
+async def proccess_pdf(pdf_path):
 
     loader = PyPDFLoader(pdf_path)
 

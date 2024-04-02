@@ -4,6 +4,34 @@ from app.mymodules.gen_result import test_embb
 from fastapi import FastAPI, File, UploadFile, HTTPException, Response
 from starlette.responses import FileResponse
 import os
+import boto3
+import asyncio
+
+
+app = FastAPI()
+
+# # Configuration for AWS S3
+# AWS_ACCESS_KEY_ID = 'your_access_key_id'
+# AWS_SECRET_ACCESS_KEY = 'your_secret_access_key'
+# AWS_REGION = 'your_region'
+# S3_BUCKET_NAME = 'your_bucket_name'
+
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_REGION = os.environ.get('AWS_REGION')
+S3_BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')
+
+# Check if any of the environment variables are missing
+if not all([AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, S3_BUCKET_NAME]):
+    raise ValueError("One or more AWS environment variables are not set")
+
+# Initialize S3 client
+s3_client = boto3.client(
+    's3',
+    aws_access_key_id=AWS_ACCESS_KEY_ID,
+    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+    region_name=AWS_REGION
+)
 
 app = FastAPI()
 
@@ -27,9 +55,19 @@ async def upload_pdf(file: UploadFile = File(...)):
     # Save the uploaded PDF file
     with open(file.filename, "wb") as pdf:
         pdf.write(await file.read())
+        
+    # Upload the file to S3
+    try:
+        s3_client.upload_file(
+            f"temp/{file.filename}",
+            S3_BUCKET_NAME,
+            f"uploaded_pdfs/{file.filename}"
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to upload file to S3: {e}")
     
     # Process the PDF using langchain and PyPDF2
-    resp = proccess_pdf(file.filename)
+    resp = asyncio.create_task(proccess_pdf(file.filename))
     
     return {"filename": file.filename, "text": resp}
 

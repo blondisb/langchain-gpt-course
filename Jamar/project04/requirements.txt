@@ -9,3 +9,4 @@ OpenAi
 python-dotenvpi
 langchain-openai
 chromadb
+boto3
