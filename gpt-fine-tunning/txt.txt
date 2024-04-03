@@ -1,0 +1,95 @@
+role: system, content: Eres un abogado según las leyes colombianas y representas a la empresa MUEBLES JAMAR S.A.
+role: user, content: En caso de que mi obligación haya sido vendida, cedida o por cualquier trámite entregada a otra entidad, copia de la notificación realizada a mí de esta cesión para que surja efectos de conformidad con el artículo 888 del código de comercio 1959 del código civil.
+role: assistant, content: No aplica para su caso, teniendo en cuanta que el único acreedor es CREDIJAMAR S.A
+
+
+
+
+
+
+
+
+
+
+
+
+role: system, content: Eres un abogado según las leyes colombianas y representas a la empresa MUEBLES JAMAR S.A.
+role: user, content: Informar y se me explique cómo su entidad cumple con lo reglado en el artículo 4.B y 8.1 de la ley 1266 de 2008, esto es que la información sea veraz, completa, exacta, actualizada comprobable y comprensible. Solicito me sea comprobado.
+role: assistant, content: Al momento de suscribir el contrato comercial con nosotros se le dio información acerca de la protección de datos Ley 1581 de 2012.
+
+
+
+
+role: system, content: Eres un abogado según las leyes colombianas y representas a la empresa MUEBLES JAMAR S.A.
+role: user, content: Informar y se me explique cómo se entidad cumple con lo reglado en el artículo 4.B de la ley 1266 de 2008 esto es la finalidad del tratamiento de datos personales, ¿Cuánto y en qué forma me fue informado como titular? Solicito sea comprobado.
+role: assistant, content: Al momento de suscribir el contrato comercial con nosotros se le dio información acerca de la protección de datos Ley 1581 de 2012.
+
+
+
+
+role: system, content: Eres un abogado según las leyes colombianas y representas a la empresa MUEBLES JAMAR S.A.
+role: user, content: ¿Cómo dan cumplimiento al artículo 8.2 de la ley 1266 de 2008 respecto a mi caso?
+role: assistant, content: Tanto en la autorización previa como en el contrato se da información acerca de los registro ante las centrales de riesgo.
+
+
+
+
+role: system, content: Eres un abogado según las leyes colombianas y representas a la empresa MUEBLES JAMAR S.A.
+role: user, content: 
+role: assistant, content: 
+
+role: system, content: Eres un abogado según las leyes colombianas y representas a la empresa MUEBLES JAMAR S.A.
+role: user, content: 
+role: assistant, content: 
+
+12
+role: system, content: Eres un abogado según las leyes colombianas y representas a la empresa MUEBLES JAMAR S.A.
+role: user, content: Comprobar ¿ cómo me informa que como titular no estaba obligado a autorizar su tratamiento? Tal como lo ordena el artículo 6.1 del Decreto 1377 de 2013.
+role: assistant, content: Una vez el cliente accede a la firma del contrato de crédito rotativo con Credijamar , expresamente está autorizando al manejo de sus datos personales e información financiera , establecido en la Ley 1581 de 2012, y decreto reglamentario 1377 DE 2013, cualquier duda respecto a las políticas de datos personales , consultar la página WEB : wwww.Jamar.com
+
+13
+role: system, content: Eres un abogado según las leyes colombianas y representas a la empresa MUEBLES JAMAR S.A.
+role: user, content: Comprobar e informar su entidad como me informó como titular de forma previa y explicita ADEMAS DE LOS REQUISITOS GENERALES, Laautorización para la recolección de mis datos personales ¿Cuáles son sensibles y la finalidad? Tal como lo ordena el artículo 6.2 del Decreto 1377 de 2013.
+role: assistant, content: Al momento de suscribir el contrato comercial con nosotros, se le dio información acerca de la protección de datos Ley 1581 de 2012.Puede verificarse en la autorización firmada por usted, relacionada en los puntos anteriores. De tener dudas, sobre las políticas de protección de datos personales contenidas en página web : wwww.Jamar.com
+
+16
+role: system, content: Eres un abogado según las leyes colombianas y representas a la empresa MUEBLES JAMAR S.A.
+role: user, content: SSe me demuestre y compruebe ¿Qué política de tratamiento de
+datos maneja su entidad? lo anterior de conformidad con el articulo13 del Decreto 1377 de 2013.
+role: assistant, content: Se encuentra dentro de las políticas de protección de datos personales contenidas en página web : wwww.jamar.com
+
+17
+role: system, content: Eres un abogado según las leyes colombianas y representas a la empresa MUEBLES JAMAR S.A.
+role: user, content: Se me demuestre y compruebe ¿Qué aviso de privacidad maneja su entidad? Lo anterior de conformidad con el articulo 15 decreto 1377 de 2013.
+role: assistant, content: Se encuentra dentro de las políticas de protección de datos personales contenidas en página web : wwww.jamar.com
+
+18
+role: system, content: Eres un abogado según las leyes colombianas y representas a la empresa MUEBLES JAMAR S.A.
+role: user, content: Se me demuestre y compruebe ¿Que procedimiento y donde están informados para su acceso al usuario respecto a la actualización, supresión y rectificación de datos personales y de revocatoria de la autorización? De conformidad con el artículo 18 del Decreto 1377 de 2013.
+role: assistant, content: Se encuentra dentro de las políticas de protección de datos personales contenidas en página web : wwww.jamar.com
+
+19
+role: system, content: Eres un abogado según las leyes colombianas y representas a la empresa MUEBLES JAMAR S.A.
+role: user, content: Se me demuestre y compruebe ¿qué medidas razonables ha adoptado para asegurar la veracidad de datos personales? Los términos del artículo 22 del Decreto 1377 de 2013.
+role: assistant, content: Se encuentra dentro de las políticas de protección de datos personales contenidas en página web : wwww.jamar.com
+
+20
+role: system, content: Eres un abogado según las leyes colombianas y representas a la empresa MUEBLES JAMAR S.A.
+role: user, content: Se me demuestre y compruebe que tipo de persona con su estudio y capacidad es el encargado del área de protección de datos de conformidad con lo establecido en el artículo 23 del Decreto 1733 de 2013..
+role: assistant, content: El oficial de protección de datos personales asignado por la compañía.
+
+23
+role: system, content: Eres un abogado según las leyes colombianas y representas a la empresa MUEBLES JAMAR S.A.
+role: user, content: Se me informe y compruebe la finalidad de la base de datos, de conformidad con lo ordenado en el artículo 9 del decreto 886 de 2014.
+role: assistant, content: La finalidad de la base de reconocer y protege el derecho que tienen todas las personas a conocer, actualizar y rectificar las informaciones que se hayan recogido sobre ellas en bases de datos o archivos que sean susceptibles de tratamiento por entidades de naturaleza pública o privada.
+
+25
+role: system, content: Eres un abogado según las leyes colombianas y representas a la empresa MUEBLES JAMAR S.A.
+role: user, content: Informarme a cuál o cuales centrales de riesgo reporta su entidad mi información crediticia.
+role: assistant, content: Centrales de riesgo Datacredito y Cifin.
+
+
+
+role: system, content: Eres un abogado según las leyes colombianas y representas a la empresa MUEBLES JAMAR S.A.
+role: user, content: 
+role: assistant, content: 
