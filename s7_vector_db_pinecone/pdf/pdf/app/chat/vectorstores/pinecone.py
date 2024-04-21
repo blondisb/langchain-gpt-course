@@ -19,9 +19,18 @@ from app.chat.embeddings.openai import embeddings
 #     embedding=embeddings
 # )
 
-def call_pinecone(docs):
+def call_vector_store(docs):
     vectorstore_from_docs = PineconeVectorStore.from_documents(
         docs,
         index_name=os.getenv("PINECONE_INDEX_NAME"),
         embedding=embeddings
     )
+
+vectorstore = PineconeVectorStore(
+    index_name=os.getenv("PINECONE_INDEX_NAME"),
+    embedding=embeddings
+) 
+
+def build_retriever(chat_args):
+    search_kwards = {"filter": {"pdf_id": chat_args.pdf_id }}
+    return vectorstore.as_retriever(search_kwards=search_kwards)
