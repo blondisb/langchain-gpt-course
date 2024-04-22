@@ -3,12 +3,24 @@ from langchain.prompts import ChatPromptTemplate
 from langchain.chains import LLMChain
 from langchain.callbacks.base import BaseCallbackHandler
 from dotenv import load_dotenv
+from queue import Queue
+from threading import Thread
 
 load_dotenv()
 
+queue = Queue()
+
 class StreamingHandler(BaseCallbackHandler):
-    def on_llm_new_token(self, token, **kwars):
-        print(token)
+    def on_llm_new_token(self, token, **kwargs):
+        # print("\ntoken")
+        # print(token)
+        queue.put(token)
+
+    def on_llm_end(self, response, **kwargs):
+        queue.put(None)
+
+    def on_llm_error(self, response, **kwargs):
+        queue.put(None)
 
 # control how openAi responds to LangChain 
 chat = ChatOpenAI(
@@ -42,16 +54,32 @@ prompt = ChatPromptTemplate.from_messages([
 # for message in chain.stream(input={"content": "tell me a joke"}):
 #     print(message)
 
+# Create a new class for override the stream method
 class StreamingChain(LLMChain):
     def stream(self, input):
-        print(self(input))
+        # print("\nself(input)")
+        # print(self(input))
         # print('hi there!')
-        yield 'hi'
-        yield 'there'
+        #- - -
+        #Generator to produces string:
+        # yield 'hi'
+        # yield 'there'
+
+        def task():
+            self(input) #Run the chain
+        Thread(target=task).start()
+        
+        while True:
+            token = queue.get()
+            if token is None:
+                break
+            yield token
+
 
 chain = StreamingChain(llm=chat, prompt=prompt)
 # chain.stream('xampp')
 # print(chain('tell me a joke'))
-for out in chain.stream('zzzz'):
+for out in chain.stream(input={"content":"tell me a joke"}):
+    # print("\nout")
     print(out)
     
