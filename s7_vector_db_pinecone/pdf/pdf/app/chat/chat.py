@@ -1,5 +1,8 @@
+from langchain.chains import ConversationalRetrievalChain
 from app.chat.models import ChatArgs
 from app.chat.vectorstores.pinecone import build_retriever
+from app.chat.llms.chatopenai import build_llm
+from app.chat.memories.sql_memory import buil_memory
 
 def build_chat(chat_args: ChatArgs):
     """
@@ -12,8 +15,22 @@ def build_chat(chat_args: ChatArgs):
 
         chain = build_chat(chat_args)
     """
+    retriever = build_retriever(chat_args)
+    llm = build_llm(chat_args)
+    memory = buil_memory(chat_args)
 
-    def buil_chat(chat_args: ChatArgs):
-        retriever = build_retriever(chat_args)
-
-    pass
+    try:
+        return ConversationalRetrievalChain.from_llm(
+            llm=llm,
+            memory=memory,
+            retriever=retriever
+        )
+    except Exception as e:
+        filename = './error.txt'
+        try:
+            with open(filename, 'w',  encoding="utf-8") as file:
+                file.write(e)
+            print("String successfully exported to", filename)
+        except IOError:
+            print("Error: Unable to write to file", filename)
+        raise Exception("\n----------------\n An error ocurred"+str(e)) from e

@@ -36,10 +36,17 @@ def add_message_to_conversation(
 
     :return: The created message
     """
+    with open('./add_message_to_conversation.txt', 'w',  encoding="utf-8") as file:
+        file.write(f"""
+            {str(conversation_id)}\n
+            {str(role)}\n
+            {str(content)}\n
+            """)
+
     return Message.create(
         conversation_id=conversation_id,
         role=role,
-        content=content,
+        content=content
     )
 
 
