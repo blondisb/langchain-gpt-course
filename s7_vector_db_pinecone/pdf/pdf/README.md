@@ -142,6 +142,7 @@ inv devworker
 ```
 redis-server
 ```
+redis-cli
 
 ### To reset the database
 
