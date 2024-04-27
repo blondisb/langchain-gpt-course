@@ -1,8 +1,10 @@
-from langchain.chains import ConversationalRetrievalChain
+# from langchain.chains import ConversationalRetrievalChain
 from app.chat.models import ChatArgs
 from app.chat.vectorstores.pinecone import build_retriever
 from app.chat.llms.chatopenai import build_llm
 from app.chat.memories.sql_memory import build_memory
+from app.chat.chains.retrieval import StreamingConversationalRetrievalChain
+
 
 def build_chat(chat_args: ChatArgs):
     """
@@ -21,7 +23,8 @@ def build_chat(chat_args: ChatArgs):
 
     try:
         print("\n-----------------------------ConversationalRetrievalChain.from_llm")
-        return ConversationalRetrievalChain.from_llm(
+        # return ConversationalRetrievalChain.from_llm(
+        return StreamingConversationalRetrievalChain.from_llm(
             llm=llm,
             memory=memory,
             retriever=retriever
