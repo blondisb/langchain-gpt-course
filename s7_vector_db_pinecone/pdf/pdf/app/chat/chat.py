@@ -1,4 +1,4 @@
-# from langchain.chains import ConversationalRetrievalChain
+from langchain.chains import ConversationalRetrievalChain
 from app.chat.models import ChatArgs
 from app.chat.vectorstores.pinecone import build_retriever
 from app.chat.llms.chatopenai import build_llm
