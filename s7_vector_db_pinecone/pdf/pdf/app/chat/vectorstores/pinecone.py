@@ -31,6 +31,9 @@ vectorstore = PineconeVectorStore(
     embedding=embeddings
 ) 
 
-def build_retriever(chat_args):
-    search_kwards = {"filter": {"pdf_id": chat_args.pdf_id }}
+def build_retriever(chat_args, k):
+    search_kwards = {
+        "filter": {"pdf_id": chat_args.pdf_id},
+        "k":k
+        }
     return vectorstore.as_retriever(search_kwards=search_kwards)
